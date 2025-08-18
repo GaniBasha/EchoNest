@@ -21,18 +21,20 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Base
+// Base route
 app.get("/", (req, res) => {
-  res.send("🎵 Spotify Clone API is running with Playlists...");
+  res.send("🎵 EchoNest API is running with Playlists...");
 });
 
-// Routes
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 
-// DB connect
+// Database + Server
 const PORT = process.env.PORT || 5000;
 mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`)))
-  .catch((err) => console.log("❌ DB Error: ", err));
+  .connect(process.env.MONGO_URI)
+  .then(() =>
+    app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`))
+  )
+  .catch((err) => console.error("❌ DB Error:", err));
