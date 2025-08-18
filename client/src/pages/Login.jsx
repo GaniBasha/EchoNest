@@ -21,8 +21,8 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       setMessage("✅ Login successful! Welcome " + res.data.user.name);
 
-      // Redirect to home page
-      setTimeout(() => navigate("/"), 1000);
+      // Redirect to /home instead of /
+      setTimeout(() => navigate("/home"), 1000);
     } catch (err) {
       setMessage(err.response?.data?.message || "❌ Error occurred");
     }
