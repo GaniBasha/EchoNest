@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Pages
 import Home from "./pages/Home";
@@ -19,23 +19,24 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-white">
       {!hideNavbar && <Navbar />}
-      
+
       <Routes>
-        {/* Root -> Home (Protected) */}
+        {/* Root -> Always go to login */}
+        <Route path="/" element={<Navigate to="/login" />} />
+
+        {/* Auth Pages */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected Routes */}
         <Route
-          path="/"
+          path="/home"
           element={
             <PrivateRoute>
               <Home />
             </PrivateRoute>
           }
         />
-
-        {/* Auth Pages */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-
-        {/* Songs (Protected) */}
         <Route
           path="/songs"
           element={
