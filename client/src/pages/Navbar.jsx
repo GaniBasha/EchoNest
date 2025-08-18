@@ -16,16 +16,10 @@ function Navbar() {
 
       {/* Right Side - Navigation Links */}
       <div className="flex space-x-6">
-        <Link
-          to="/"
-          className="hover:text-purple-400 transition font-medium"
-        >
+        <Link to="/" className="hover:text-purple-400 transition font-medium">
           Home
         </Link>
-        <Link
-          to="/songs"
-          className="hover:text-purple-400 transition font-medium"
-        >
+        <Link to="/songs" className="hover:text-purple-400 transition font-medium">
           Songs
         </Link>
         <button

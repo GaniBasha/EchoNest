@@ -7,6 +7,7 @@ function Login() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  // Use env variable for backend API
   const API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
@@ -20,7 +21,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       setMessage("✅ Login successful! Welcome " + res.data.user.name);
 
-      // ✅ Redirect to Home.jsx ("/")
+      // Redirect to home page
       setTimeout(() => navigate("/"), 1000);
     } catch (err) {
       setMessage(err.response?.data?.message || "❌ Error occurred");
@@ -39,6 +40,7 @@ function Login() {
             name="email"
             placeholder="Email"
             onChange={handleChange}
+            required
             className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white"
           />
           <input
@@ -46,6 +48,7 @@ function Login() {
             name="password"
             placeholder="Password"
             onChange={handleChange}
+            required
             className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 text-white"
           />
           <button

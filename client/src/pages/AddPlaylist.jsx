@@ -48,7 +48,7 @@ function AddPlaylist() {
       setTimeout(() => navigate("/songs"), 1500);
     } catch (err) {
       console.error("❌ Upload failed:", err);
-      setMessage("❌ Failed to upload playlist.");
+      setMessage(err.response?.data?.message || "❌ Failed to upload playlist.");
     }
   };
 
