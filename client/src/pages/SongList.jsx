@@ -8,10 +8,12 @@ function SongList() {
   const [currentIndex, setCurrentIndex] = useState(null);
   const audioRef = useRef(null);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/songs");
+        const res = await axios.get(`${API_URL}/api/songs`);
         setSongs(res.data);
       } catch (err) {
         console.error("❌ Error fetching playlists:", err);
@@ -20,12 +22,12 @@ function SongList() {
       }
     };
     fetchSongs();
-  }, []);
+  }, [API_URL]);
 
   const handlePlay = (index) => {
     setCurrentIndex(index);
     if (audioRef.current) {
-      audioRef.current.src = `http://localhost:5000${songs[index].fileUrl}`;
+      audioRef.current.src = `${API_URL}${songs[index].fileUrl}`;
       audioRef.current.play();
     }
   };
@@ -70,12 +72,14 @@ function SongList() {
               >
                 {song.coverUrl && (
                   <img
-                    src={`http://localhost:5000${song.coverUrl}`}
+                    src={`${API_URL}${song.coverUrl}`}
                     alt={song.title}
                     className="rounded-lg mb-3 w-full h-48 object-cover"
                   />
                 )}
-                <h2 className="text-xl font-semibold text-white">{song.title}</h2>
+                <h2 className="text-xl font-semibold text-white">
+                  {song.title}
+                </h2>
                 <p className="text-gray-400">🎤 {song.artist}</p>
                 <p className="text-gray-500">🎬 {song.movie}</p>
 

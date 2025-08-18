@@ -10,9 +10,11 @@ function AddPlaylist() {
   });
   const [file, setFile] = useState(null);
   const [cover, setCover] = useState(null);
-  const [coverPreview, setCoverPreview] = useState(null); // ✅ for preview
+  const [coverPreview, setCoverPreview] = useState(null);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +26,7 @@ function AddPlaylist() {
     const selectedFile = e.target.files[0];
     setCover(selectedFile);
     if (selectedFile) {
-      setCoverPreview(URL.createObjectURL(selectedFile)); // ✅ preview
+      setCoverPreview(URL.createObjectURL(selectedFile));
     }
   };
 
@@ -39,7 +41,7 @@ function AddPlaylist() {
     if (cover) form.append("cover", cover);
 
     try {
-      await axios.post("http://localhost:5000/api/songs", form, {
+      await axios.post(`${API_URL}/api/songs`, form, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setMessage("✅ Playlist uploaded successfully!");
@@ -107,7 +109,6 @@ function AddPlaylist() {
               className="w-full text-gray-300"
             />
 
-            {/* ✅ Preview Image */}
             {coverPreview && (
               <div className="mt-4">
                 <p className="text-sm text-gray-400 mb-2">Preview:</p>
