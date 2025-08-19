@@ -21,7 +21,7 @@ function App() {
       {!hideNavbar && <Navbar />}
 
       <Routes>
-        {/* Root -> Always go to login */}
+        {/* Default: always go to login */}
         <Route path="/" element={<Navigate to="/login" />} />
 
         {/* Auth Pages */}
